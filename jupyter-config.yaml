@@ -1,0 +1,13 @@
+proxy:
+  secretToken: "bc602bd57346cb7e79ee8f193019a3020bd76ab565a532d8ca446e67a553b849"
+singleuser:
+  image:
+    name: astroaustin/wallaby-jupyterhub
+    tag: v0.2.0
+  extraEnv:
+    DJANGO_ALLOW_ASYNC_UNSAFE: "true"
+    DJANGO_SETTINGS_MODULE: "src.api.settings"
+    DJANGO_DATABASE_NAME: "sofiadb"
+    DJANGO_DATABASE_USER: "admin"
+    DJANGO_DATABASE_PASSWORD:
+    DJANGO_DATABASE_HOST:
