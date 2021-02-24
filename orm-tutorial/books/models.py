@@ -1,5 +1,5 @@
 from django.db import models
-from shops.models import Shop
+from stores.models import Store
  
 
 class Book(models.Model):
@@ -7,7 +7,4 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=200)
     price = models.FloatField()
-    shop_id = models.ForeignKey(to=Shop, null=True, blank=True, on_delete=models.SET_NULL)
-
-    class Meta:
-        db_table = 'books'
+    store = models.ForeignKey(Store, to_field='id', null=True, blank=True, on_delete=models.SET_NULL)

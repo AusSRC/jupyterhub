@@ -10,17 +10,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('stores', '0001_initial'),
+        ('books', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Book',
+            name='Sale',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=100)),
-                ('author', models.CharField(max_length=200)),
-                ('price', models.FloatField()),
-                ('store', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='stores.store')),
+                ('sold_at', models.DateTimeField(auto_now=True)),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='books.book')),
+                ('store', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='stores.store')),
             ],
         ),
     ]
