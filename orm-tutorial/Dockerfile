@@ -5,5 +5,5 @@ COPY ./requirements.txt requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 RUN rm requirements.txt
 
-COPY . ./src/
+COPY --chown=jovyan . ./src/
 COPY ./tutorial.ipynb .
