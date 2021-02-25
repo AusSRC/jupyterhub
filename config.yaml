@@ -17,4 +17,4 @@ singleuser:
       description: "Introductory tutorial notebook for those who have never used Django."
       kubespawner_override:
         image: astroaustin/jupyter-tutorial
-        tag: v0.1.2
+        tag: v0.1.3
