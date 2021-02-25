@@ -4,21 +4,17 @@ singleuser:
   image:
     name: astroaustin/wallaby-jupyterhub
     tag: v0.2.0
+  extraEnv:
+    DJANGO_DATABASE_NAME: "sofiadb"
+    DJANGO_DATABASE_USER: "admin"
+    DJANGO_DATABASE_PASSWORD: "password"
+    DJANGO_DATABASE_HOST: "127.0.0.1"
   profileList:
-    - display_name: "WALLABY Notebook"
+    - display_name: "WALLABY"
       description: "Interact with the WALLABY database in Python through a Jupyter Notebook."
       default: true
-      extraEnv:
-        DJANGO_ALLOW_ASYNC_UNSAFE: "true"
-        DJANGO_SETTINGS_MODULE: "src.api.settings"
-        DJANGO_DATABASE_NAME: "sofiadb"
-        DJANGO_DATABASE_USER: "admin"
-        DJANGO_DATABASE_PASSWORD: 
-        DJANGO_DATABASE_HOST:
-    - display_name: "Tutorial"
-      description: "For those who have never used the Django ORM for accessing databases."
+    - display_name: "Django Tutorial"
+      description: "Introductory tutorial notebook for those who have never used Django."
       kubespawner_override:
         image: astroaustin/jupyter-tutorial
-      extraEnv:
-        DJANGO_ALLOW_ASYNC_UNSAFE: "true"
-        DJANGO_SETTINGS_MODULE: "src.demo.settings"
+        tag: v0.1.2
