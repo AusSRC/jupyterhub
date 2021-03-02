@@ -5,5 +5,6 @@ COPY ./requirements.txt requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 RUN rm requirements.txt
 
+# Note: --chown=jovyan is to allow user access to local sqlite database.
 COPY --chown=jovyan . ./src/
-COPY ./tutorial.ipynb .
+COPY ./notebook.ipynb .

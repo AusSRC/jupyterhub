@@ -3,18 +3,28 @@ proxy:
 singleuser:
   image:
     name: astroaustin/wallaby-jupyterhub
-    tag: v0.2.0
+    tag: v0.2.4
+    default_url: 
+  # memory:
+  #   limit: 32G
+  #   guarantee: 16G
   extraEnv:
     DJANGO_DATABASE_NAME: "sofiadb"
     DJANGO_DATABASE_USER: "admin"
-    DJANGO_DATABASE_PASSWORD: "password"
-    DJANGO_DATABASE_HOST: "127.0.0.1"
+    DJANGO_DATABASE_PASSWORD: 
+    DJANGO_DATABASE_HOST: 
+    DJANGO_SETTINGS_MODULE: "src.api.settings"
+    DJANGO_ALLOW_ASYNC_UNSAFE: "True"
+    
   profileList:
     - display_name: "WALLABY"
       description: "Interact with the WALLABY database in Python through a Jupyter Notebook."
       default: true
+      kubespawner_override:
+        default_url: /notebooks/notebook.ipynb
     - display_name: "Django Tutorial"
       description: "Introductory tutorial notebook for those who have never used Django."
       kubespawner_override:
         image: astroaustin/jupyter-tutorial
-        tag: v0.1.3
+        tag: v0.2.0
+        default_url: /notebooks/notebook.ipynb
