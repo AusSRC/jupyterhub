@@ -26,5 +26,5 @@ singleuser:
       description: "Introductory tutorial notebook for those who have never used Django."
       kubespawner_override:
         image: astroaustin/jupyter-tutorial
-        tag: v0.2.0
+        tag: v0.2.1
         default_url: /notebooks/notebook.ipynb
