@@ -25,3 +25,6 @@ class Instance(models.Model):
 
     def save(self, *args, **kwargs):
         raise WriteError('This table is read only.')
+
+    def delete(self, *args, **kwargs):
+        raise WriteError('This table is read only.')
