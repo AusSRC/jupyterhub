@@ -5,6 +5,7 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from write_error import WriteError
 from django.db import models
 
 
@@ -17,3 +18,6 @@ class Run(models.Model):
         managed = False
         db_table = 'run'
         unique_together = (('name', 'sanity_thresholds'),)
+
+    def save(self, *args, **kwargs):
+        raise WriteError('This table is read only.')

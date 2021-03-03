@@ -1,3 +1,4 @@
+from write_error import WriteError
 from django.db import models
 from run.models import Run
 
@@ -21,3 +22,6 @@ class Instance(models.Model):
         managed = False
         db_table = 'instance'
         unique_together = (('run', 'filename', 'boundary'),)
+
+    def save(self, *args, **kwargs):
+        raise WriteError('This table is read only.')
