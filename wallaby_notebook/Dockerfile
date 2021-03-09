@@ -7,3 +7,4 @@ RUN rm requirements.txt
 
 COPY . ./src/
 COPY ./notebook.ipynb .
+COPY ./workflow.ipynb .

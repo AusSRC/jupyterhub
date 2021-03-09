@@ -1,30 +1,47 @@
 proxy:
-  secretToken: "bc602bd57346cb7e79ee8f193019a3020bd76ab565a532d8ca446e67a553b849"
+  secretToken: "583f29e0b75d8e292369b941089215e0902ef584797b7ff14bfd3030e1acab49"
+
 singleuser:
   image:
     name: astroaustin/wallaby-jupyterhub
-    tag: v0.2.4
-    default_url: 
-  # memory:
-  #   limit: 32G
-  #   guarantee: 16G
+    tag: v0.4.1
   extraEnv:
     DJANGO_DATABASE_NAME: "sofiadb"
     DJANGO_DATABASE_USER: "admin"
-    DJANGO_DATABASE_PASSWORD: 
-    DJANGO_DATABASE_HOST: 
+    DJANGO_DATABASE_PASSWORD: "admin"
+    DJANGO_DATABASE_HOST: "146.118.69.90"
     DJANGO_SETTINGS_MODULE: "src.api.settings"
     DJANGO_ALLOW_ASYNC_UNSAFE: "True"
-    
   profileList:
     - display_name: "WALLABY"
-      description: "Interact with the WALLABY database in Python through a Jupyter Notebook."
+      description: "Empty Jupyter Notebook with access to the WALLABY database."
       default: true
       kubespawner_override:
         default_url: /notebooks/notebook.ipynb
+    - display_name: "WALLABY Workflow Example"
+      description: "Run through an example WALLABY workflow in the Jupyter Notebook."
+      kubespawner_override:
+        default_url: /notebooks/workflow.ipynb
     - display_name: "Django Tutorial"
       description: "Introductory tutorial notebook for those who have never used Django."
       kubespawner_override:
         image: astroaustin/tutorial-jupyterhub
         tag: v0.1.0
         default_url: /notebooks/notebook.ipynb
+  # memory:
+  #   limit: 32G
+  #   guarantee: 16G
+
+hub:
+  cookieSecret: "cd42658cefedce5b28fd2b9f45fca499b9e07ac2cbefdda558a2a2e8faee9859"
+  config:
+    Authenticator:
+      allowed_users:
+        - tobias.westmeier@uwa.edu.au
+        - kristine.spekkens@gmail.com
+        - shaoli@bao.ac.cn
+        - tristan.reynolds@uwa.edu.au
+    DummyAuthenticator:
+      password: password
+    JupyterHub:
+      authenticator_class: dummy
