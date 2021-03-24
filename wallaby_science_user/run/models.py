@@ -7,23 +7,20 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from write_error import WriteError
 from django.db import models
-from detection.models import Detection
 
 
-class Products(models.Model):
+class Run(models.Model):
     id = models.BigAutoField(primary_key=True)
-    detection = models.OneToOneField(Detection, models.DO_NOTHING)
-    cube = models.BinaryField(blank=True, null=True)
-    mask = models.BinaryField(blank=True, null=True)
-    moment0 = models.BinaryField(blank=True, null=True)
-    moment1 = models.BinaryField(blank=True, null=True)
-    moment2 = models.BinaryField(blank=True, null=True)
-    channels = models.BinaryField(blank=True, null=True)
-    spectrum = models.BinaryField(blank=True, null=True)
+    name = models.TextField()
+    sanity_thresholds = models.JSONField()
+
+    def __str__(self):
+        return f"{self.name}"
 
     class Meta:
         managed = False
-        db_table = 'products'
+        db_table = 'run'
+        unique_together = (('name', 'sanity_thresholds'),)
 
     def save(self, *args, **kwargs):
         raise WriteError('This table is read only.')
