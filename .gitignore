@@ -2,4 +2,5 @@
 SoFiAX_services
 .ipynb_checkpoints
 config.yaml
+jupyterlab-config.yaml
 env
