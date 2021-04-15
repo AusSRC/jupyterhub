@@ -1,5 +1,7 @@
 # Jupyterhub Notebooks
 
+## Run locally
+
 The collection of AusSRC notebooks provided for RADEC users. Users are able to build and run the images locally. The following command is used to run a notebook
 
 ```
@@ -12,6 +14,22 @@ Note also that the `docker.env` file is used for setting Django the following da
 * `DJANGO_DATABASE_USER`
 * `DJANGO_DATABASE_PASSWORD`
 * `DJANGO_DATABASE_HOST`
+
+## Deploy 
+
+To deploy our Jupyterhub configuration onto a Kubernetes cluster we can run
+
+```
+helm install jupyterhub jupyterhub/jupyterhub -f config.yml -n jupyter --timeout 500s
+```
+
+Alternatively, to update the configuration we can use
+
+```
+helm upgrade --cleanup-on-fail jupyterhub jupyterhub/jupyterhub -f config.yml -n jupyter --timeout 180s
+```
+
+## Notebooks
 
 ### WALLABY Admin
 
