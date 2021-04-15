@@ -22,5 +22,6 @@ RUN cd SoFiAX && python setup.py install
 # SoFiA-X services
 USER jovyan
 RUN pip install -r SoFiAX_services/api/requirements.txt
+RUN pip install jupyterlab
 COPY sofia.par sofia.par
 COPY ./notebooks/ .
