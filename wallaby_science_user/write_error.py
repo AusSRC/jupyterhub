@@ -1,2 +1,0 @@
-class WriteError(Exception):
-    pass

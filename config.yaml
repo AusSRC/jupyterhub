@@ -1,0 +1,54 @@
+proxy:
+  secretToken: 
+
+singleuser:
+  defaultUrl: "/lab"
+  image:
+    name: astroaustin/wallaby-admin-jupyter
+    tag: v0.3.0
+  extraEnv:
+    DJANGO_SECRET_KEY: 
+    DJANGO_SETTINGS_MODULE: "api.settings"
+    DJANGO_ALLOW_ASYNC_UNSAFE: "True"
+    DATABASE_HOST: 
+    DATABASE_NAME: 
+    DATABASE_USER: 
+    DATABASE_PASSWORD: 
+  profileList:
+    - display_name: "WALLABY"
+      description: "Admin notebook for management of the WALLABY database."
+      default: true
+      kubespawner_override:
+        default_url: /lab/tree/notebook.ipynb
+  lifecycleHooks:
+    postStart:
+      exec:
+        command:
+          - "sh"
+          - "-c"
+          - >
+            cp -r /app/* /home/jovyan/ || :
+
+hub:
+  cookieSecret: 
+  extraConfig:
+    myConfig.py: |
+      from oauthenticator.generic import GenericOAuthenticator
+
+      KEYCLOAK_REALM = 'AusSRC'
+      KEYCLOAK_DOMAIN = 'auth.aussrc.org'
+      JUPYTERHUB_HOST = 
+
+      c.Spawner.cmd=["jupyter-labhub"]
+      c.LocalAuthenticator.create_system_users = True
+      c.JupyterHub.authenticator_class = 'oauthenticator.generic.GenericOAuthenticator'
+      c.GenericOAuthenticator.login_service = 'Keycloak'
+      c.GenericOAuthenticator.authorize_url =  f'https://{KEYCLOAK_DOMAIN}/auth/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth'
+      c.GenericOAuthenticator.userdata_url = f'https://{KEYCLOAK_DOMAIN}/auth/realms/{KEYCLOAK_REALM}/protocol/openid-connect/userinfo'
+      c.GenericOAuthenticator.token_url = f'https://{KEYCLOAK_DOMAIN}/auth/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token'
+      c.GenericOAuthenticator.oauth_callback_url = f'{JUPYTERHUB_HOST}/hub/oauth_callback'
+      c.GenericOAuthenticator.userdata_method = 'GET'
+      c.GenericOAuthenticator.userdata_params = {"state": "state"}
+      c.GenericOAuthenticator.username_key = "preferred_username"
+      c.OAuthenticator.client_id = "notebook"
+      c.OAuthenticator.client_secret = 

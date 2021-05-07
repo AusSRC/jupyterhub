@@ -1,17 +1,41 @@
-# Jupyterhub Notebooks
+# Jupyterhub
 
-The collection of AusSRC notebooks provided for RADEC users. Users are able to build and run the images locally. The following command is used to run a notebook
+A repository of notebooks to deploy. You will need [docker](https://www.docker.com/) installed on your machine.
+
+## Build
+
+To build the docker image run the following:
 
 ```
-docker run -p 8888:8888 --env-file env/docker.env <notebook>
+docker build -t <IMAGE_NAME> <SUBDIRECTORY>
 ```
 
-Note also that the `docker.env` file is used for setting Django the following database environment variables
+There are instructions below for running the notebook. To use the notebook in a production setting you will need to push it to [dockerhub](https://www.docker.com/products/docker-hub):
 
-* `DJANGO_DATABASE_NAME`
-* `DJANGO_DATABASE_USER`
-* `DJANGO_DATABASE_PASSWORD`
-* `DJANGO_DATABASE_HOST`
+```
+docker push <IMAGE_NAME>
+```
+
+## Run locally
+
+Create a `docker.env` file with the following variables
+
+```
+DJANGO_ALLOW_ASYNC_UNSAFE=True
+DJANGO_SETTINGS_MODULE=api.settings
+DJANGO_DATABASE_NAME=<DATABASE>
+DJANGO_DATABASE_USER=<USER>
+DJANGO_DATABASE_PASSWORD=<PASSWORD>
+DJANGO_DATABASE_HOST=<HOST>
+```
+
+Then, run the docker image with the environment variables defined
+
+```
+docker run -p 8888:8888 --env-file docker.env <notebook>
+```
+
+## Notebooks
 
 ### WALLABY Admin
 
@@ -20,6 +44,8 @@ The WALLABY admin notebook is used to maintain the archive. It requires read/wri
 In the notebook we go through the scenario of developing a detection duplicate matching algorithm, which can be deployed as a RADEC workflow, and re-running `sofia` on detections that have been identified as duplicates.
 
 ### WALLABY Science User
+
+**TODO(austin): This notebook requires updating**
 
 The WALLABY science user notebook can be used to explore and perform analysis on the content of the database. It provides read-only access to a view of the database, and some computing resource guarantee.
 

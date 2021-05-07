@@ -1,6 +1,5 @@
 .DS_Store
 SoFiAX_services
 .ipynb_checkpoints
-config.yaml
-jupyterlab-config.yaml
 env
+archive
