@@ -37,6 +37,22 @@ docker run -p 8888:8888 --env-file docker.env <notebook>
 
 ## Notebooks
 
+## Deploy 
+
+To deploy our Jupyterhub configuration onto a Kubernetes cluster we can run
+
+```
+helm install jupyterhub jupyterhub/jupyterhub -f config.yml -n jupyter --timeout 500s
+```
+
+Alternatively, to update the configuration we can use
+
+```
+helm upgrade --cleanup-on-fail jupyterhub jupyterhub/jupyterhub -f config.yml -n jupyter --timeout 180s
+```
+
+## Notebooks
+
 ### WALLABY Admin
 
 The WALLABY admin notebook is used to maintain the archive. It requires read/write access to the database and will be accessible only by authorised users. 
